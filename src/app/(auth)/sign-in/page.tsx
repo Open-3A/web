@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
 
+import { GoogleSignIn } from "@/components/auth/google-sign-in";
 import { SignInForm } from "@/components/auth/sign-in-form";
 import { H1 } from "@/components/typography/h1";
 import { P } from "@/components/typography/p";
-import { Button } from "@/components/ui/button";
 
 export default function SignInPage() {
   return (
@@ -20,10 +19,7 @@ export default function SignInPage() {
           <div className="h-px w-full bg-border" />
         </div>
 
-        <Button variant="secondary" className="w-full">
-          <FcGoogle className="mr-2 h-5 w-5" />
-          Entrar com o Google
-        </Button>
+        <GoogleSignIn />
 
         <P className="text-center text-sm text-muted-foreground">
           Não tem uma conta?{" "}
