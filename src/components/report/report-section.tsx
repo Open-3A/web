@@ -39,6 +39,7 @@ export async function ReportSection() {
         reports.map(({ id, title, description, publishedAt }) => (
           <ReportCard
             key={id}
+            id={id}
             title={title}
             description={description}
             publishedAt={formatDate(publishedAt)}

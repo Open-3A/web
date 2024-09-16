@@ -1,7 +1,7 @@
 import { baseUrl } from "./configuration";
 
 export type ReportResponse = {
-    id: number;
+    id: string;
     title: string;
     description: string;
     publishedAt: Date;

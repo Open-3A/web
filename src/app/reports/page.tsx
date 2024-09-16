@@ -42,14 +42,17 @@ export default function ReportPage() {
       <div className="container mx-auto space-y-12 px-4 pt-20">
         <H2>Relatórios</H2>
 
-        {reports.map(({ id, title, description, publishedAt }) => (
-          <ReportCard
-            key={id}
-            title={title}
-            description={description}
-            publishedAt={formatDate(publishedAt)}
-          />
-        ))}
+        <div className="flex flex-col gap-5">
+          {reports.map(({ id, title, description, publishedAt }) => (
+            <ReportCard
+              key={id}
+              id={id}
+              title={title}
+              description={description}
+              publishedAt={formatDate(publishedAt)}
+            />
+          ))}
+        </div>
 
         <InfiniteScroll
           hasMore={hasMore}
