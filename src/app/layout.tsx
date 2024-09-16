@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
+import { NavigationBar } from "@/components/common/navigation-bar";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <NavigationBar />
           {children}
         </ThemeProvider>
       </body>

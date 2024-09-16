@@ -27,7 +27,7 @@ export default function SignUpPage() {
 
         <P className="text-center text-sm text-muted-foreground">
           Já tem uma conta?{" "}
-          <Link href={"/sign-up"} className="text-primary underline">
+          <Link href={"/sign-in"} className="text-primary underline">
             Entrar
           </Link>
         </P>

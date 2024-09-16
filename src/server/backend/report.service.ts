@@ -34,3 +34,17 @@ export async function getReports(page: number, size = 5): Promise<ReportResponse
 
     return reports;
 }
+
+export async function getReportContent(reportId: string) {
+    const response = await fetch(`${baseUrl}/api/v1/reports/${reportId}/download`, {
+        next: {
+            revalidate: 30 // 30 segundos
+        }
+    });
+
+    if (!response.ok) {
+        return null;
+    }
+
+    return await response.blob();
+}
