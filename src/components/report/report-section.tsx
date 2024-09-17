@@ -35,19 +35,22 @@ export async function ReportSection() {
   return (
     <>
       <H2>Relatórios</H2>
-      {reports ? (
-        reports.map(({ id, title, description, publishedAt }) => (
-          <ReportCard
-            key={id}
-            id={id}
-            title={title}
-            description={description}
-            publishedAt={formatDate(publishedAt)}
-          />
-        ))
-      ) : (
-        <Lead>Nenhum relatório encontrado...</Lead>
-      )}
+
+      <div className="flex flex-col gap-5">
+        {reports ? (
+          reports.map(({ id, title, description, publishedAt }) => (
+            <ReportCard
+              key={id}
+              id={id}
+              title={title}
+              description={description}
+              publishedAt={formatDate(publishedAt)}
+            />
+          ))
+        ) : (
+          <Lead>Nenhum relatório encontrado...</Lead>
+        )}
+      </div>
     </>
   );
 }
