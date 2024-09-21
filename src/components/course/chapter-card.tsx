@@ -11,37 +11,32 @@ import {
   CardTitle,
 } from "../ui/card";
 
-interface ModuleCardProps {
+interface ChapterCardProps {
+  moduleId: string;
   id: string;
   title: string;
   description: string;
   status: string;
-  numberOfCompletedChapters: number;
-  numberOfChapters: number;
 }
 
-export function ModuleCard({
+export function ChapterCard({
+  moduleId,
   id,
   title,
   description,
   status,
-  numberOfChapters,
-  numberOfCompletedChapters,
-}: ModuleCardProps) {
+}: ChapterCardProps) {
   const [text, color] = getFormattedStatus(status);
 
   return (
-    <Link href={`/courses/${id}`}>
+    <Link href={`/courses/${moduleId}/chapters/${id}`}>
       <Card className="shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl">{title}</CardTitle>
+          <CardTitle className="text-xl">{title}</CardTitle>
         </CardHeader>
         <CardContent>{description}</CardContent>
         <CardFooter className="flex items-center justify-between">
           <Badge className={color}>{text}</Badge>
-          <span>
-            {numberOfCompletedChapters}/{numberOfChapters}
-          </span>
         </CardFooter>
       </Card>
     </Link>

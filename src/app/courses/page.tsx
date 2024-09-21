@@ -51,6 +51,7 @@ export default async function CoursePage() {
           }) => (
             <ModuleCard
               key={id}
+              id={id}
               title={title}
               description={description}
               status={status}
