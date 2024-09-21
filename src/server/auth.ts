@@ -1,11 +1,14 @@
 import {
   type DefaultSession,
   getServerSession,
-  type NextAuthOptions,
+  type NextAuthOptions
 } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 import { env } from "@/env";
+
+import { getUser, registerUser } from "./backend/user.service";
+import { startCourse } from "./backend/user-course.service";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -35,13 +38,36 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
+    session: async ({ session, token }) => {
+      if (token.name && token.email) {
+        let userId = await getUser(token.email);
+
+        if (!userId) {
+          userId = await registerUser(token.name, token.email);
+        }
+
+        if (userId) {
+          await startCourse(userId);
+
+          return {
+            ...session,
+            user: {
+              id: userId,
+              name: token.name,
+              email: token.email,
+              image: token.picture
+            },
+          }
+        }
+      }
+
+      return {
+        ...session,
+        user: {
+          ...session.user,
+        },
+      }
+    },
   },
   providers: [
     GoogleProvider({
@@ -55,16 +81,10 @@ export const authOptions: NextAuthOptions = {
         }
       }
     })
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
   ],
+  session: {
+    strategy: "jwt"
+  },
 };
 
 /**
