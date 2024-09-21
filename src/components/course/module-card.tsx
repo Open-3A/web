@@ -2,24 +2,22 @@ import { Badge } from "../ui/badge";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "../ui/card";
 
 function getFormattedStatus(status: string) {
-  if (status.toUpperCase() == "BLOCKED") {
-    return "Bloqueado";
-  }
-
   if (status.toUpperCase() == "TO_CONTINUE") {
-    return "Em andamento";
+    return ["Em andamento", "bg-yellow-400"];
   }
 
   if (status.toUpperCase() == "COMPLETED") {
-    return "Concluído";
+    return ["Concluído", "bg-green-400"];
   }
+
+  // status = BLOCKED
+  return ["Bloqueado", "bg-red-400"];
 }
 
 interface ModuleCardProps {
@@ -37,6 +35,8 @@ export function ModuleCard({
   numberOfChapters,
   numberOfCompletedChapters,
 }: ModuleCardProps) {
+  const [text, color] = getFormattedStatus(status);
+
   return (
     <Card className="shadow-lg">
       <CardHeader>
@@ -44,7 +44,7 @@ export function ModuleCard({
       </CardHeader>
       <CardContent>{description}</CardContent>
       <CardFooter className="flex items-center justify-between">
-        <Badge>{getFormattedStatus(status)}</Badge>
+        <Badge className={color}>{text}</Badge>
         <span>
           {numberOfCompletedChapters}/{numberOfChapters}
         </span>
