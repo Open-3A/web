@@ -26,7 +26,7 @@ function calculateModuleProgression(
 
 interface ModulePageProps {
   params: {
-    id: string;
+    moduleId: string;
   };
 }
 
@@ -37,17 +37,16 @@ export default async function ModulePage({ params }: ModulePageProps) {
     redirect("/sign-in");
   }
 
-  const { id } = params;
+  const { moduleId } = params;
   const course = await getCourseContent(session.user.id);
 
-  const courseModule = course?.content.find((module) => module.id === id);
+  const courseModule = course?.content.find((module) => module.id === moduleId);
 
   if (!courseModule) {
     return <NotFound />;
   }
 
   const {
-    id: moduleId,
     title,
     description,
     chapters,

@@ -3,14 +3,6 @@ import { redirect } from "next/navigation";
 import { ModuleCard } from "@/components/course/module-card";
 import { H1 } from "@/components/typography/h1";
 import { Large } from "@/components/typography/large";
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { ProgressWithValue } from "@/components/ui/progress-with-value";
 import { getServerAuthSession } from "@/server/auth";
 import { getCourseContent } from "@/server/backend/course.service";

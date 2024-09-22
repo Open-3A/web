@@ -44,3 +44,18 @@ export async function getCourseContent(userId: string): Promise<UserProgressResp
         return null;
     }
 }
+
+
+export async function getChapterContent(chapterId: string) {
+    const response = await fetch(`${baseUrl}/api/v1/courses/chapters/${chapterId}`, {
+        next: {
+            revalidate: 30 // 30 segundos
+        }
+    });
+
+    if (!response.ok) {
+        return null;
+    }
+
+    return await response.blob();
+}

@@ -1,4 +1,4 @@
-import { PDFViewer } from "@/components/common/pdf-viewer";
+import { ReportPDFViewer } from "@/components/report/report-pdf-viewer";
 
 interface ReportContentPageProps {
   params: {
@@ -9,5 +9,5 @@ interface ReportContentPageProps {
 export default function ReportContentPage({ params }: ReportContentPageProps) {
   const { id } = params;
 
-  return <PDFViewer reportId={id} />;
+  return <ReportPDFViewer reportId={id} />;
 }

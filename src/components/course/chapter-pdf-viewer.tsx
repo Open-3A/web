@@ -3,23 +3,23 @@
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { getReportContent } from "@/server/backend/report.service";
+import { getChapterContent } from "@/server/backend/course.service";
 
 import { H2 } from "../typography/h2";
 import { P } from "../typography/p";
 
-interface PDFViewerProps {
-  reportId: string;
+interface ChapterPDFViewerProps {
+  chapterId: string;
 }
 
-export function PDFViewer({ reportId }: PDFViewerProps) {
+export function ChapterPDFViewer({ chapterId }: ChapterPDFViewerProps) {
   const [pdfUrl, setPdfUrl] = useState("");
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const loadPDF = async () => {
       try {
-        const fileData = await getReportContent(reportId);
+        const fileData = await getChapterContent(chapterId);
 
         if (!fileData) {
           return;
@@ -45,9 +45,9 @@ export function PDFViewer({ reportId }: PDFViewerProps) {
   if (isError) {
     return (
       <>
-        <H2>Relatório indisponível</H2>
+        <H2>Capítulo indisponível</H2>
         <P>
-          Não foi possível obter este relatório. Tente novamente mais tarde.
+          Não foi possível obter o conteúdo deste capítulo. Tente novamente mais tarde.
         </P>
       </>
     );
